@@ -13,6 +13,9 @@ const Adding = () => {
     function addItem(){
         let newList = JSON.parse(localStorage.getItem("List"));
         newList[input] = "ran out";
+        let date = new Date();
+        let storageDate = date.getMonth()+1 + "." + date.getDate() + "/" + date.getHours() + ":" + date.getMinutes();
+        localStorage.setItem(input, JSON.stringify([{init: storageDate}]));
         localStorage.setItem("List", JSON.stringify(newList));
         window.location.reload(false);
     }
