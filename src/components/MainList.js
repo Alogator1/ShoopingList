@@ -6,7 +6,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import { IconButton, TextareaAutosize } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
-import InfoIcon from '@material-ui/icons/Info';
+import InfoIcon from "@material-ui/icons/Info";
 import { Button } from "@material-ui/core";
 
 const MainList = () => {
@@ -14,20 +14,17 @@ const MainList = () => {
   const [textArea, setTextArea] = useState("");
   let isHave;
 
-  function getInfo(field){
+  function getInfo(field) {
     let status = JSON.parse(localStorage.getItem(field));
     let statusText = "";
-    status.forEach(element => {
-        let elementArray = Object.entries(element);
-        console.log(elementArray);
-        statusText += elementArray[0][0] + " time " + elementArray[0][1];
-    }
-    )
+    status.forEach((element) => {
+      let elementArray = Object.entries(element);
+      statusText += elementArray[0][0] + " time " + elementArray[0][1];
+    });
     setTextArea(statusText);
   }
 
   function onlySome(payload) {
-    console.log(payload);
     let newObj = Object.entries(
       Object.assign({}, JSON.parse(localStorage.getItem("List")))
     );
@@ -40,8 +37,7 @@ const MainList = () => {
       const obj1 = Object.fromEntries(ranOut);
       setList(obj1);
     } else {
-        console.log(JSON.parse(localStorage.getItem("List")));
-        setList(JSON.parse(localStorage.getItem("List")));
+      setList(JSON.parse(localStorage.getItem("List")));
     }
   }
 
@@ -83,15 +79,31 @@ const MainList = () => {
       newList[field] = "ran out";
       let oldDate = JSON.parse(localStorage.getItem(field));
       let date = new Date();
-      let storageDate = date.getMonth()+1 + "." + date.getDate() + "/" + date.getHours() + ":" + date.getMinutes();
-      oldDate.push({ranOut: storageDate});
+      let storageDate =
+        date.getMonth() +
+        1 +
+        "." +
+        date.getDate() +
+        "/" +
+        date.getHours() +
+        ":" +
+        date.getMinutes();
+      oldDate.push({ ranOut: storageDate });
       localStorage.setItem(field, JSON.stringify(oldDate));
     } else {
       newList[field] = "have";
       let oldDate = JSON.parse(localStorage.getItem(field));
       let date = new Date();
-      let storageDate = date.getMonth()+1 + "." + date.getDate() + "/" + date.getHours() + ":" + date.getMinutes();
-      oldDate.push({have: storageDate});
+      let storageDate =
+        date.getMonth() +
+        1 +
+        "." +
+        date.getDate() +
+        "/" +
+        date.getHours() +
+        ":" +
+        date.getMinutes();
+      oldDate.push({ have: storageDate });
       localStorage.setItem(field, JSON.stringify(oldDate));
     }
     localStorage.setItem("List", JSON.stringify(newList));
@@ -160,7 +172,7 @@ const MainList = () => {
         RESET
       </Button>
       <div>
-      <TextareaAutosize value={textArea} rowsMin={5}/>
+        <TextareaAutosize value={textArea} rowsMin={5} />
       </div>
     </div>
   );
